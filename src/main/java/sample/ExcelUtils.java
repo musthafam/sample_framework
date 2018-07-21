@@ -3,6 +3,7 @@ package sample;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -95,8 +96,32 @@ public class ExcelUtils {
 		
 	}
 	
+	/**
+	 * This method is to update the Excel sheet with the input data
+	 * @param rowNumber  The row number in the sheet
+	 * @param colNumber  The Column Number in the sheet
+	 * @param cellData  The data that needs to be updated in the sheet
+	 */
+	public static void setCellData(int rowNumber , int colNumber, String cellData) {
+		try {
+			row = sheet.getRow(rowNumber);
+			if(row==null) {
+				row = sheet.createRow(rowNumber);
+			}
+			cell=row.getCell(colNumber);
+			if(cell==null) {
+				cell=row.createCell(colNumber);
+				cell.setCellValue(cellData);
+			} else {
+				cell.setCellValue(cellData);
+			}
+			FileOutputStream fos = new FileOutputStream(file);
+			workbook.write(fos);
+			fos.flush();
+			fos.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
-	
-	
-
 }
