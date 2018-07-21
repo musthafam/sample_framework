@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -20,8 +19,8 @@ public class ExcelUtils {
 	
 	/**
 	 * This method helps to set the File path of the excel sheet and the Sheet name in which data is present
-	 * @param filePath  the Filepath of the excel sheet
-	 * @param sheetName The sheetname that needs be accessed
+	 * @param filePath  the File path of the excel sheet
+	 * @param sheetName The sheet name that needs be accessed
 	 * 
 	 */
 	
@@ -57,6 +56,42 @@ public class ExcelUtils {
 			e.printStackTrace();
 		}
 		return cellData;
+		
+	}
+	
+	/**
+	 * This method helps to retrieve cell value based on Row name and Column Name
+	 * @param rowName   Name of the row
+	 * @param columnName Name of the column
+	 * @return
+	 */
+	
+	public static String getCellData(String rowName , String columnName) {
+		String cellValue="";
+		try {
+			int rowNum = sheet.getLastRowNum()+1;
+			int colNum = sheet.getRow(0).getLastCellNum();
+			int reqColumn = 0;
+			XSSFRow firstRow = sheet.getRow(0);
+			for(int i=0;i<colNum;i++) {
+				XSSFCell cellVal = firstRow.getCell(i);
+				String tempColName = cellVal.getStringCellValue();
+				if(tempColName.equalsIgnoreCase(columnName)) {
+					reqColumn = cellVal.getColumnIndex();
+				}
+			}
+			for(int j=0;j<rowNum;j++) {
+				XSSFRow tempRow = sheet.getRow(j);
+				XSSFCell tempCell = tempRow.getCell(0);
+				XSSFCell reqCell = tempRow.getCell(reqColumn);
+				if(tempCell.getStringCellValue().equalsIgnoreCase(rowName)) {
+					cellValue=reqCell.getStringCellValue();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cellValue;
 		
 	}
 	
