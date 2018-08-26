@@ -10,6 +10,12 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+/**
+ * 
+ * @author Musthafa
+ * This util is to perform excel data retreival and data update back to Excel sheet
+ *
+ */
 public class ExcelUtils {
 	
 	private static File file;
