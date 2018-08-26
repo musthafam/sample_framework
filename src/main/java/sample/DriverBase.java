@@ -1,6 +1,7 @@
 package sample;
 
 import java.io.File;
+import java.lang.reflect.Method;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,6 +12,7 @@ import org.testng.annotations.BeforeSuite;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class DriverBase {
 	protected static WebDriver driver;
@@ -33,7 +35,8 @@ public class DriverBase {
 	}
 	
 	@BeforeMethod
-	public void startDriver() {
+	public void startDriver(Method method) {
+		test = extent.startTest(this.getClass().getSimpleName()+"::"+method.getName());
 		if(browser.equalsIgnoreCase("chrome")) {
 			String chromeExePath = System.getProperty("user.dir")+File.separator+
 					"src"+File.separator+"test"+File.separator+"resources"+File.separator+
@@ -41,10 +44,7 @@ public class DriverBase {
 			System.setProperty("webdriver.chrome.driver", chromeExePath);
 			driver = new ChromeDriver();
 		}
-		/*ReportsPath = System.getProperty("user.dir")+File.separator+"test-output"
-				+File.separator+"TestReport"+System.currentTimeMillis()+".html";
-		extent= new ExtentReports(ReportsPath);*/
-		test = extent.startTest("Sample");
+		test.log(LogStatus.PASS, "Browser Launched Successfully");
 		
 		
 	}
@@ -54,7 +54,8 @@ public class DriverBase {
 	@AfterMethod
 	public void tearDown() {
 		driver.quit();
-		//driver.get(ReportsPath);
+		test.log(LogStatus.PASS, "Browser Closed Successfully");
+		extent.endTest(test);
 	}
 	
 	@AfterSuite
