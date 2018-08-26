@@ -7,8 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -37,6 +39,20 @@ public class DriverBase {
 	@BeforeMethod
 	public void startDriver(Method method) {
 		test = extent.startTest(this.getClass().getSimpleName()+"::"+method.getName());
+		
+		test.log(LogStatus.PASS, "Browser Launched Successfully");
+		
+		
+	}
+
+	@AfterMethod
+	public void tearDown() {
+		test.log(LogStatus.PASS, "Browser Closed Successfully");
+		extent.endTest(test);
+	}
+	
+	@BeforeTest
+	public void startDriverBeforeTest(){
 		if(browser.equalsIgnoreCase("chrome")) {
 			String chromeExePath = System.getProperty("user.dir")+File.separator+
 					"src"+File.separator+"test"+File.separator+"resources"+File.separator+
@@ -44,18 +60,11 @@ public class DriverBase {
 			System.setProperty("webdriver.chrome.driver", chromeExePath);
 			driver = new ChromeDriver();
 		}
-		test.log(LogStatus.PASS, "Browser Launched Successfully");
-		
-		
 	}
 	
-	
-	
-	@AfterMethod
-	public void tearDown() {
+	@AfterTest
+	public void quitAllBrowserSession() {
 		driver.quit();
-		test.log(LogStatus.PASS, "Browser Closed Successfully");
-		extent.endTest(test);
 	}
 	
 	@AfterSuite

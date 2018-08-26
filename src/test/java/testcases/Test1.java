@@ -1,7 +1,9 @@
 package testcases;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -35,6 +37,16 @@ public class Test1 extends DriverUtils{
 		test.log(LogStatus.INFO, "Starting");
 		startPage("https://www.google.co.in");
 		test.log(LogStatus.INFO, "Closing");
+	}
+	
+	@Test
+	public void test4() {
+		test.log(LogStatus.INFO, "Starting");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if(driver.findElement(By.className("gsfi")).isDisplayed())
+			test.log(LogStatus.PASS,"Search Bar present");
+		else
+			test.log(LogStatus.FAIL, "Search Bar not present");
 	}
 
 }

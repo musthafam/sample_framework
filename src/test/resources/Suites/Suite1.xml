@@ -5,6 +5,7 @@
 		<classes>
 			<!-- ReaderPlus Desktop Test cases-->
 			<class name="testcases.Test1" />
+			<class name="com.testscripts.practise.forms.PractiseFormTest"/>
 			</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
