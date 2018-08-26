@@ -4,6 +4,8 @@ import java.io.File;
 
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
 import sample.DriverUtils;
 import sample.EnvParams;
 import sample.ExcelUtils;
@@ -30,8 +32,9 @@ public class Test1 extends DriverUtils{
 	public void test3() {
 		String browserName =EnvParams.BROWSER_NAME;
 		System.out.println(browserName);
-		System.out.println("Before");
+		test.log(LogStatus.INFO, "Starting");
 		startPage("https://www.google.co.in");
+		test.log(LogStatus.INFO, "Closing");
 	}
 
 }
