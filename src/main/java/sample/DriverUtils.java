@@ -1,6 +1,7 @@
 package sample;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -40,6 +41,42 @@ public class DriverUtils extends DriverBase{
 			e.printStackTrace();
 		}
 		return isElementPresent;
+	}
+	
+
+	/**
+	 * 
+	 * @param locator - id or the xpath of the element
+	 * @param elementname - Name of the element which is for reporting purpose
+	 */
+	public void click(String locator,String elementName) {
+		driver.findElement(By.xpath(locator)).click();
+		test.log(LogStatus.INFO, "Clicking on Element -->"+elementName);
+	}
+	
+	/**
+	 * 
+	 * @param locator - id or the xpath of the element
+	 * @param selectionValue - Value to be selected in drop down
+	 */
+	public void selectByVisibleName(String locator,String selectionValue) {
+		Select oSelect = new Select(driver.findElement(By.xpath(locator)));
+		oSelect.selectByVisibleText(selectionValue);
+		test.log(LogStatus.INFO, "Selecting "+selectionValue+" from Drop down:");
+		
+	}
+	
+	public int noOfElements(String locator , String elementName) {
+		int noOfElements = 0;
+		noOfElements = driver.findElements(By.xpath(locator)).size();
+		test.log(LogStatus.INFO, "no of elements for "+elementName+ "is -->"+noOfElements);
+		return noOfElements;
+	}
+	
+	public String getText(String locator , String elementName) {
+		String text = "";
+		text = driver.findElement(By.xpath(locator)).getText();
+		return text;
 	}
 
 }
