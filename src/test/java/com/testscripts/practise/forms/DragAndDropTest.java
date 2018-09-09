@@ -1,19 +1,18 @@
 package com.testscripts.practise.forms;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.practice.forms.pages.DragAndDropPage;
-import com.practice.framework.utils.DriverUtils;
+import com.practice.framework.utils.BaseTest;
 
-public class DragAndDropTest extends DriverUtils{
+public class DragAndDropTest extends BaseTest{
 
 	@Test
 	public void sampleDragAndDropTest() {
 		DragAndDropPage dragPage = new DragAndDropPage();
 		dragPage.loadPage();
-		Assert.assertEquals(dragPage.getTextFromTarget(), "Drop here");
+		assertEquals(dragPage.getTextFromTarget(), "Drop here");
 		dragPage.dragAndDrop();
-		Assert.assertEquals(dragPage.getTextFromTarget(), "Dropped!");
+		assertEquals(dragPage.getTextFromTarget(), "Dropped!");
 	}
 }
