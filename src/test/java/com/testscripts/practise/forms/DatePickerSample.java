@@ -17,12 +17,6 @@ public class DatePickerSample extends DriverUtils{
 		DatePg.selectMonth();
 		DatePg.selectYear();
 		DatePg.selectDate(19);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		DatePg.getDateAfterSelection();
 	}
 
