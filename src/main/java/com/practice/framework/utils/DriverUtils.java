@@ -178,5 +178,29 @@ public class DriverUtils extends DriverBase{
 	        		driver.findElement(By.xpath(locator)), "");
 		}
 	}
+	
+	public void acceptAlert() {
+		driver.switchTo().alert().accept();
+		test.log(LogStatus.INFO, "Accepting the alert");
+	}
+	
+	public void dismissAlert() {
+		driver.switchTo().alert().dismiss();
+		test.log(LogStatus.INFO, "Dismissing the alert");
+	}
+	
+	/**
+	 * 
+	 * @param text - to be sent to the alert
+	 */
+	public void sendTextToAlert(String text) {
+		driver.switchTo().alert().sendKeys(text);
+		test.log(LogStatus.INFO, "Sending "+text+" to the alert");
+	}
+	
+	public String getTextFromAlert() {
+		test.log(LogStatus.INFO, "Getting text from the alert");
+		return driver.switchTo().alert().getText();
+	}
 
 }
