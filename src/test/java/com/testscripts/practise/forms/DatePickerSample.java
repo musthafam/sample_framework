@@ -3,8 +3,7 @@ package com.testscripts.practise.forms;
 import org.testng.annotations.Test;
 
 import com.practice.forms.pages.DatePickerPage;
-
-import sample.DriverUtils;
+import com.practice.framework.utils.DriverUtils;
 
 public class DatePickerSample extends DriverUtils{
 	

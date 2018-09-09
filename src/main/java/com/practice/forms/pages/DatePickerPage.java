@@ -1,8 +1,7 @@
 package com.practice.forms.pages;
 
+import com.practice.framework.utils.DriverUtils;
 import com.relevantcodes.extentreports.LogStatus;
-
-import sample.DriverUtils;
 
 /**
  * 

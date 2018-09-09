@@ -1,4 +1,4 @@
-package sample;
+package com.practice.framework.utils;
 
 import java.io.File;
 import java.lang.reflect.Method;
