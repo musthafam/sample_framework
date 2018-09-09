@@ -1,10 +1,20 @@
 package sample;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+
+/**
+ * 
+ * @author Musthafa
+ * This class will all have all common methods for Handling elements
+ *
+ */
 public class DriverUtils extends DriverBase{
 	
 	/**
@@ -66,6 +76,12 @@ public class DriverUtils extends DriverBase{
 		
 	}
 	
+	/**
+	 * 
+	 * @param locator - id or the xpath of the element
+	 * @param elementName - Name of the element which is for reporting purpose
+	 * @return No of elements found for the given locator
+	 */
 	public int noOfElements(String locator , String elementName) {
 		int noOfElements = 0;
 		noOfElements = driver.findElements(By.xpath(locator)).size();
@@ -73,10 +89,29 @@ public class DriverUtils extends DriverBase{
 		return noOfElements;
 	}
 	
+	
+	/**
+	 * 
+	 * @param locator - id or the xpath of the element
+	 * @param elementName - Name of the element which is for reporting purpose
+	 * @return returns the text from the given locator
+	 */
 	public String getText(String locator , String elementName) {
 		String text = "";
 		text = driver.findElement(By.xpath(locator)).getText();
 		return text;
+	}
+	
+	/**
+	 * 
+	 * @param locator - id or the xpath of the element
+	 * @param elementName  - Name of the element which is for reporting purpose
+	 * @return list of webElements
+	 */
+	public List<WebElement> getListOfElements(String locator , String elementName) {
+		test.log(LogStatus.INFO, "Getting the list of "+elementName);
+		return driver.findElements(By.xpath(locator));
+		
 	}
 
 }
