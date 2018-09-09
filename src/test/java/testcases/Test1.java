@@ -6,11 +6,10 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
+import com.practice.framework.utils.DriverUtils;
+import com.practice.framework.utils.EnvParams;
+import com.practice.framework.utils.ExcelUtils;
 import com.relevantcodes.extentreports.LogStatus;
-
-import sample.DriverUtils;
-import sample.EnvParams;
-import sample.ExcelUtils;
 
 public class Test1 extends DriverUtils{
 	/*@Test

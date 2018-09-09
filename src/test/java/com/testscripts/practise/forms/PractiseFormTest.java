@@ -3,8 +3,7 @@ package com.testscripts.practise.forms;
 import org.testng.annotations.Test;
 
 import com.practice.forms.pages.PracticeForm;
-
-import sample.DriverBase;
+import com.practice.framework.utils.DriverBase;
 
 public class PractiseFormTest extends DriverBase{
 	
