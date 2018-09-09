@@ -3,6 +3,7 @@ package com.practice.framework.utils;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -161,6 +162,21 @@ public class DriverUtils extends DriverBase{
 		Actions act = new Actions(driver);
 		act.dragAndDrop(driver.findElement(By.xpath(fromElement)), driver.findElement(By.xpath(toElement))).build().perform();
 		test.log(LogStatus.INFO, "Drag and drop from-->"+fromElementName+" to the element-->"+toElementName);
+	}
+	
+	/**
+	 * 
+	 * @param locator - id or the xpath of the element
+	 * @param elementName  - Name of the element which is for reporting purpose
+	 */
+	public void highlightAnElement(String locator , String elementName) {
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		for(int i=0;i<=3;i++) {
+			js.executeScript("arguments[0].setAttribute('style', arguments[1]);",
+					driver.findElement(By.xpath(locator)), "color: green; border: 2px solid green;");
+	        js.executeScript("arguments[0].setAttribute('style', arguments[1]);",
+	        		driver.findElement(By.xpath(locator)), "");
+		}
 	}
 
 }

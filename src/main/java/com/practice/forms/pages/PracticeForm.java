@@ -18,6 +18,7 @@ public class PracticeForm extends DriverUtils{
 			test.log(LogStatus.PASS, "First Name field is present in the page");
 		else
 			test.log(LogStatus.FAIL, "First Name field is not present in the page");
+		highlightAnElement(firstName,"FirstName field");
 		
 	}
 	
@@ -26,6 +27,7 @@ public class PracticeForm extends DriverUtils{
 			test.log(LogStatus.PASS, "Last Name field is present in the page");
 		else
 			test.log(LogStatus.FAIL, "Last Name field is not present in the page");
+		highlightAnElement(lastName,"lastName field");
 		
 	}
 
