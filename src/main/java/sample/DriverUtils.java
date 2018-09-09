@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -112,6 +113,54 @@ public class DriverUtils extends DriverBase{
 		test.log(LogStatus.INFO, "Getting the list of "+elementName);
 		return driver.findElements(By.xpath(locator));
 		
+	}
+	
+	/**
+	 * 
+	 * @param index - Index of the iframe to which we intend to switch
+	 */
+	public void switchToiFrameByIndex(int index) {
+		test.log(LogStatus.INFO, "Switching to iframe via Index -->"+index);
+		driver.switchTo().frame(index);
+	}
+	
+	/**
+	 * 
+	 * @param locator - id or the xpath of the element
+	 * @param frameName - Name of the frame which is for reporting purpose
+	 */
+	public void switchToiFrameByLocator(String locator, String frameName) {
+		test.log(LogStatus.INFO, "Switching to iframe via frame locator -->"+frameName);
+		driver.switchTo().frame(locator);
+	}
+	
+	public void switchToDefaultContent() {
+		test.log(LogStatus.INFO, "Switching to default contnet");
+		driver.switchTo().defaultContent();
+	}
+	
+	/**
+	 * 
+	 * @param locator - id or the xpath of the element
+	 * @param elementName  - Name of the element which is for reporting purpose
+	 */
+	public void moveToElement(String locator, String elementName) {
+		Actions act = new Actions(driver);
+		act.moveToElement(driver.findElement(By.xpath(locator))).build().perform();
+		test.log(LogStatus.INFO, "Moving to the element-->"+elementName);
+	}
+	
+	/**
+	 * 
+	 * @param fromElement - id or the xpath of the element
+	 * @param toElement - id or the xpath of the element
+	 * @param fromElementName - Name of the element which is for reporting purpose
+	 * @param toElementName - Name of the element which is for reporting purpose
+	 */
+	public void dragAndDrop(String fromElement, String toElement,String fromElementName, String toElementName) {
+		Actions act = new Actions(driver);
+		act.dragAndDrop(driver.findElement(By.xpath(fromElement)), driver.findElement(By.xpath(toElement))).build().perform();
+		test.log(LogStatus.INFO, "Drag and drop from-->"+fromElementName+" to the element-->"+toElementName);
 	}
 
 }
