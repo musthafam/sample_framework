@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Sample" parallel="classes" thread-count="1">
-	<test name="Test">
-		<classes>
-			<!-- ReaderPlus Desktop Test cases-->
-			<class name="testcases.Test1" />
+<suite name="Sample" parallel="none" thread-count="1">
+	<test name="Chrome">
+			<parameter name="browserName" value="Chrome" />
+			<classes>
+			<class name="com.testscripts.practise.forms.PractiseFormTest"/>
+			</classes>
+	</test> <!-- Test -->
+	<test name="Firefox">
+			<parameter name="browserName" value="firefox" />
+			<classes>
 			<class name="com.testscripts.practise.forms.PractiseFormTest"/>
 			</classes>
 	</test> <!-- Test -->
