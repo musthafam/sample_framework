@@ -30,8 +30,14 @@ public class DriverBase {
 	
 	@BeforeSuite
 	public void setExtentReport() {
-		ReportsPath = System.getProperty("user.dir")+File.separator+"test-output"
-				+File.separator+"TestReport"+System.currentTimeMillis()+".html";
+		if(System.getenv("BUILD_NUMBER")!=null){
+			ReportsPath = System.getProperty("user.dir")+File.separator+"test-output"
+					+File.separator+ System.getenv("BUILD_NUMBER") +"TestReport.html";
+		} else {
+			ReportsPath = System.getProperty("user.dir")+File.separator+"test-output"
+					+File.separator+"TestReport"+System.currentTimeMillis()+".html";
+		}
+		
 		ExtentConfigPath = System.getProperty("user.dir")+File.separator+
 				"src"+File.separator+"test"+File.separator+"resources"+File.separator+
 				"ExtentConfig"+File.separator+"extentConfig.xml";
