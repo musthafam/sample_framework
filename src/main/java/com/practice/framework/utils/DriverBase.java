@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -59,6 +60,12 @@ public class DriverBase {
 					"drivers"+File.separator+"chromedriver.exe";
 			System.setProperty("webdriver.chrome.driver", chromeExePath);
 			driver = new ChromeDriver();
+		} else if(browser.equalsIgnoreCase("firefox")) {
+			String geckoExePath = System.getProperty("user.dir")+File.separator+
+					"src"+File.separator+"test"+File.separator+"resources"+File.separator+
+					"drivers"+File.separator+"geckodriver.exe";
+			System.setProperty("webdriver.gecko.driver", geckoExePath);
+			driver = new FirefoxDriver();
 		}
 	}
 	
