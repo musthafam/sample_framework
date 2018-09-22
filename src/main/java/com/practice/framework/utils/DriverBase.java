@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -66,6 +67,12 @@ public class DriverBase {
 					"drivers"+File.separator+"geckodriver.exe";
 			System.setProperty("webdriver.gecko.driver", geckoExePath);
 			driver = new FirefoxDriver();
+		} else if(browser.equalsIgnoreCase("ie")) {
+			String geckoExePath = System.getProperty("user.dir")+File.separator+
+					"src"+File.separator+"test"+File.separator+"resources"+File.separator+
+					"drivers"+File.separator+"IEDriverServer.exe";
+			System.setProperty("webdriver.ie.driver", geckoExePath);
+			driver = new InternetExplorerDriver();
 		}
 	}
 	
