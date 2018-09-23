@@ -1,12 +1,17 @@
 package com.practice.framework.utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.io.FileHandler;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -58,8 +63,11 @@ public class DriverBase {
 	}
 
 	@AfterMethod
-	public void tearDown() {
-		test.log(LogStatus.PASS, "Browser Closed Successfully");
+	public void tearDown(ITestResult result) throws IOException {
+		if(result.getStatus() == ITestResult.FAILURE) {
+			String screenShotPath = getScreenShot(this.getClass().getSimpleName());
+			test.log(LogStatus.INFO, "Screenshot below"+test.addScreenCapture(screenShotPath));
+		}
 		extent.endTest(test);
 	}
 	
@@ -120,6 +128,14 @@ public class DriverBase {
 		extent.flush();
 	}
 	
+	public static String getScreenShot(String ScreenshotName) throws IOException {
+		TakesScreenshot ts = (TakesScreenshot)driver;
+		File Source = ts.getScreenshotAs(OutputType.FILE);
+		String ScreenshotPath = System.getProperty("user.dir") +"\\ErrorScreenshots\\"+ScreenshotName+System.currentTimeMillis()+".png";
+		FileHandler.copy(Source, new File(ScreenshotPath));
+		return ScreenshotPath;
+		
+	}
 	
 
 }
